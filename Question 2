@@ -1,0 +1,60 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <cstdlib>
+#include <time.h>
+
+
+int main (){
+	
+	int n1, n2=0;
+	int i, med=0, max=0, min=50, aux;
+	
+	srand(time(0));
+	
+	printf("Digite um tamanho para o vetor: ");
+	scanf ("%d", &n1);
+	
+	int v[n1];
+		
+	
+		printf ("\n---- Vetor Sorteado ----\n");
+		
+		
+		for(i=0; i < n1; i++){
+			v[i]=rand()%50;
+			printf("%d - ", v[i]);
+			med += v[i];
+			
+				if (v[i]%2 == 0){
+				n2 ++;
+				}
+			
+				if (v[i] > max){
+					max = v[i];
+				}
+				if (v[i] <= min){
+					min = v[i];
+				}
+				
+		}
+		
+		printf("\nO valor maximo do vetor e: %d\n", max);	
+		printf("\nO valor minimo do vetor e: %d\n", min);	
+		printf("\nO valor da media do vetor e: %d\n", med/n1);
+		
+		printf ("\n---- Numeros Pares ----\n");
+		
+		int v2[n2];
+	
+		
+				for(i=0; i < n1; i++){
+					if (v[i]%2 == 0){ 
+					v2[i] = v[i];
+						printf("%d - ", v2[i]);
+				
+					}
+				}
+				
+					printf("\nO tamanho do vetor e: %d", n2);
+		
+}
