@@ -7,7 +7,7 @@
 
 int estadoAtual = LIGADO;
 int tempoPressionado = 0;
-int limiteTempo = 10; // Limite de tempo em segundos
+//int limiteTempo = 10; // Limite de tempo em segundos
 int pinoBotao = 0; // Substituir
 
 int main() {    
@@ -16,8 +16,8 @@ int main() {   
 
     	for (;;) {
 		int estadoBotao = digitalRead(pinoBotao);
-        	// Verifica as transições de estado 
-
+        	 
+		// Verifica as transições de estado
 		if (estadoAtual == LIGADO && estadoBotao == DESLIGADO) {
 		// Se o botão estava pressionado (LIGADO) e agora foi solto (DESLIGADO)
 		estadoAtual = PROTEGIDO; // Muda para o estado PROTEGIDO        
@@ -43,13 +43,13 @@ int main() {   
 		tempoPressionado++; // Incrementa o tempo pressionado se o botão está pressionado no estado DESLIGADO        
 }
 
-		// Verificar se o limite de tempo foi atingido
+		/* Verificar se o limite de tempo foi atingido
 		if (tempoPressionado >= limiteTempo) {
 		printf("Botão pressionado por %d segundos (limite atingido).\n", tempoPressionado);
-		// Execute qualquer ação desejada aqui quando o limite for atingido
+		*/
 }
 
-        estadoBotaoAnterior = estadoBotao; // Atualiza o estado anterior para a próxima iteração
+        estadoBotaoAnterior = estadoBotao; // Atualiza o estado 
 }
 
     return 0;
