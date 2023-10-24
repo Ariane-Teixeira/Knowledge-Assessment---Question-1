@@ -54,3 +54,4 @@ int main() {   
 
     return 0;
 }
+/* Verificar como realizar um tempo de espera sem que seja ociosa e implementar uma função de debounce para o botão*/
