@@ -24,7 +24,7 @@ int main() {   
 }
 
  		else if (estadoAtual == PROTEGIDO) {
-		sleep(1); // Espera por 1 segundo            
+		sleep(10); // Espera por 1 segundo            
 		tempoPressionado = 0; // Zera a contagem de tempo pressionado
 		estadoAtual = DESLIGADO; // Após a espera, muda para o estado DESLIGADO
 }
