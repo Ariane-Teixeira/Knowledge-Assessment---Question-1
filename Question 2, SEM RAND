@@ -1,0 +1,60 @@
+#include <stdio.h>
+
+int main() {
+    int n1, n2 = 0;
+    int i, med = 0, max = 0, min = 50, aux;
+
+    
+    printf("Digite um tamanho para o vetor: ");
+    scanf("%d", &n1);
+
+    // Declara um vetor de inteiros de tamanho n1
+    int v[n1];
+
+    
+    printf("\n---- Vetor ----\n");
+
+    // Preenche o vetor com valores inseridos pelo usuário
+    for (i = 0; i < n1; i++) {
+        printf("Digite o valor para a posicao %d: ", i + 1);
+        scanf("%d", &v[i]);
+        med += v[i]; // Calcula a soma dos valores do vetor
+
+        if (v[i] % 2 == 0) {
+            n2++; // Conta quantos números pares existem no vetor
+        }
+
+        if (v[i] > max) {
+            max = v[i]; // Encontra o valor máximo no vetor
+        }
+        if (v[i] < min) {
+            min = v[i]; // Encontra o valor mínimo no vetor
+        }
+    }
+
+    // Imprime o valor máximo, mínimo e a média dos valores no vetor
+    printf("\nO valor maximo do vetor e: %d\n", max);
+    printf("O valor minimo do vetor e: %d\n", min);
+    printf("O valor da media do vetor e: %.2f\n", (float)med / n1);
+
+    
+    printf("\n---- Numeros Pares ----\n");
+
+    // Cria um novo vetor para armazenar os números pares
+    int v2[n2];
+    int j = 0;
+
+    // Preenche o vetor v2 com os números pares do vetor v
+    for (i = 0; i < n1; i++) {
+        if (v[i] % 2 == 0) {
+            v2[j] = v[i];
+            printf("%d - ", v2[j]); // Imprime os números pares
+            j++;
+        }
+    }
+
+    // Imprime o tamanho do vetor de números pares
+    printf("\nO tamanho do vetor de numeros pares e: %d\n", n2);
+
+    return 0;
+}
