@@ -1,0 +1,61 @@
+
+int led = 13;
+int botao = 11;
+int estadoBotaoAnterior = LOW;
+unsigned long inicioPressionado = 0;
+const unsigned long tempoMinimoPressionado = 1000; // 1 segundo em milissegundos
+const unsigned long tempoProtegido = 10000; // 10 segundos em milissegundos
+const unsigned long debounceDelay = 50; // Tempo de debounce em milissegundos
+bool emEstadoProtegido = false;
+unsigned long inicioEstadoProtegido = 0;
+
+void setup() {
+  pinMode(led, OUTPUT);
+  pinMode(botao, INPUT);
+  digitalWrite(led, LOW);
+
+  // Inicializa a comunicação com o monitor serial
+  Serial.begin(9600);
+}
+
+void loop() {
+  int estadoBotao = digitalRead(botao);
+
+  if (estadoBotao != estadoBotaoAnterior) {
+    // Iniciar contagem do debounce
+    unsigned long tempoAtual = millis();
+    if (tempoAtual - inicioPressionado >= debounceDelay) {
+      // Tempo de debounce passou, atualizar o estado
+      inicioPressionado = tempoAtual;
+
+      if (estadoBotao == HIGH) {
+        // O botão foi pressionado
+        inicioPressionado = millis(); // Registra o início da pressão
+      }
+    }
+  }
+
+  if (estadoBotao == HIGH && millis() - inicioPressionado >= tempoMinimoPressionado) {
+    // O botão está pressionado continuamente por tempoMinimoPressionado
+    if (!emEstadoProtegido) {
+      inicioEstadoProtegido = millis(); // Inicia o estado protegido
+      emEstadoProtegido = true;
+    }
+    digitalWrite(led, HIGH); // Liga o LED
+  } else {
+    if (emEstadoProtegido) {
+      if (millis() - inicioEstadoProtegido >= tempoProtegido) {
+        emEstadoProtegido = false; // Sai do estado protegido após 10 segundos
+        Serial.print("Botão pressionado por ");
+        Serial.print(millis() - inicioPressionado);
+        Serial.println(" milissegundos.");
+      }
+      digitalWrite(led, HIGH); // Mantém o LED aceso durante o estado protegido
+    } else {
+      digitalWrite(led, LOW); // Desliga o LED
+    }
+  }
+
+  estadoBotaoAnterior = estadoBotao;
+}
+https://www.tinkercad.com/things/2SugInLGidT-question-1/editel
